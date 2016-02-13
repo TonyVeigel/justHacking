@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import combinedReducers from '../reducers';
+//import combinedReducers from '../reducers';
 
 let finalCreateStore;
 if(__DEVELOPMENT__){
