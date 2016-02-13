@@ -13,7 +13,7 @@ module.exports = {
     publicPath: '/comm/assets/'
   },
   plugins: [
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin("../stylesheets/styles.css"),
     new webpack.DefinePlugin({
       __DEVELOPMENT__: false
     }),
