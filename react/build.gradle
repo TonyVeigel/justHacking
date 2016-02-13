@@ -1,0 +1,11 @@
+task npmInstall(type: Exec) {
+	commandLine "npm", "install"
+}
+
+task testFrontEnd(type: Exec, dependsOn: ['npmInstall']) {
+	commandLine "npm", "run", "test"
+}
+
+task buildReact(type: Exec, dependsOn: ['testFrontEnd']) {
+	commandLine "npm", "run", "deploy"
+}
