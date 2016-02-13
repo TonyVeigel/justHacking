@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var buildPath = path.resolve('../grails-app/assets/javascripts');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var mainPath = path.resolve(__dirname, 'src', 'index.js');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry:mainPath,
@@ -30,7 +31,7 @@ module.exports = {
       loaders: ['babel'],
       exclude: [nodeModulesPath]
     },
-    loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+    {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
     { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
     {test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
     {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
