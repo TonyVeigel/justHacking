@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router';
 import { browserHistory } from 'react-router'
-import Home from './components/Home';
+import Home from './containers/Home';
 
 export default class Routes extends Component {
   render() {
