@@ -1,7 +1,10 @@
+import {combineReducers} from 'redux';
+import * as constants from '../constants/constants';
+import { reducer as formReducer } from 'redux-form'
 
-import { combineReducers } from 'redux';
-import {homeReducer} from './home';
+import {authentication} from '../reducers/authentication';
 
 export default combineReducers({
-  homeReducer
-});
+  authentication,
+  form: formReducer 
+})

@@ -1,23 +1,17 @@
-import React,{Component, PropTypes} from 'react';
-import HomeView from '../components/Home';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import HomeView from '../components/Home';
 
 class Home extends Component {
 
   render(){
     return(
-      <HomeView/>
+      <div>
+        <HomeView />
+      </div>
     )
   }
 
 }
 
-
-function mapStateToProps(state){
-
-  return {
-
-  };
-}
-
-export default connect(mapStateToProps)(Home);
+export default connect()(Home)

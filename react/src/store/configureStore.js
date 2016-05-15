@@ -1,17 +1,18 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from '../middleware/middleware';
+import sagaMiddleware from 'redux-saga'
 import combinedReducers from '../reducers';
+import clientMiddleware from '../middleware/clientMiddleware';
 
 let finalCreateStore;
 if(__DEVELOPMENT__){
   const createLogger = require('redux-logger');
   const logger = createLogger();
   finalCreateStore = compose(
-    applyMiddleware(thunkMiddleware, logger),
+    applyMiddleware(clientMiddleware, logger),
     window.devToolsExtension ? window.devToolsExtension() : f => f,
   )(createStore);
 }else{
-  finalCreateStore = applyMiddleware(thunkMiddleware)(createStore);
+  finalCreateStore = applyMiddleware(clientMiddleware)(createStore);
 }
 
 export default function configureStore(initialState) {

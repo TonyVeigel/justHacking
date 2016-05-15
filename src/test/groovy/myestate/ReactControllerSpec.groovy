@@ -1,13 +1,13 @@
-package service
+package myestate
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(GroovyService)
-class GroovyServiceSpec extends Specification {
+@TestFor(ReactController)
+class ReactControllerSpec extends Specification {
 
     def setup() {
     }
