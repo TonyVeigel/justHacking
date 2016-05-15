@@ -1,4 +1,4 @@
-package service
+package myestate
 
 import grails.transaction.Transactional
 
