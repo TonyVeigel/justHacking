@@ -28,19 +28,10 @@ export default function clientMiddleware({dispatch, getState}) {
                 .then(response => response.json())
                 .then(result => {
                   next({...rest, result, type: SUCCESS})
-                  return result;
                 })
-                .catch(function(error) {
+                .catch(error => {
                     next({...rest, type: FAILURE})
-                    const response = error.response;
-                    // if (response === undefined) {
-                    //   next(messageCenterAddMessage(Math.random(), "We are experiencing technical problems at the moment. Please try later or contact support.", "danger"));
-                    // } else {
-                    //     response.json()
-                    //       .then(function(json) {
-                    //         next(messageCenterAddMessage(Math.random(), json.error, "danger"));
-                    //       });
-                    // }
+                    return Promise.reject('error');
                 });
         };
 }

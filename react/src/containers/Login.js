@@ -12,7 +12,13 @@ class Login extends Component{
 
   handleSubmit(data){
     const {dispatch} = this.props;
-    dispatch(loginUser(data));
+    dispatch(loginUser(data))
+      .then( () =>
+        this.context.router.push('/app')
+      )
+      .catch( () =>
+        console.log('Login Error')
+    )
   }
 
   render(){
@@ -22,7 +28,10 @@ class Login extends Component{
       </div>
     )
   }
+}
 
+Login.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default connect()(Login)
