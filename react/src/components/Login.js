@@ -22,49 +22,81 @@ const validate = values => {
 }
 
 const Login = props => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, reset, submitting, createAccount, handleCreateAccountClick, loginError } = props
   return (
     <div className='container'>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Field name="Username" component={username =>
-          <TextField hintText = "Username"
-            floatingLabelText="Username"
-            errorText = {username.touched && username.error}
-            {...username}
-          />
-        }/>
-      </div>
-      <div>
-        <Field name="Password" component={password =>
-              <TextField
-                hintText = "Password"
-                type="password"
-                floatingLabelText="Password"
-                errorText = {password.touched && password.error}
-                {...password}
-              />
-            }/>
-      </div>
-      <div>
-        <Field name="email" component={email =>
-              <TextField
-                hintText="Email"
-                floatingLabelText="Email"
-                errorText = {email.touched && email.error}
-                {...email}
-              />
-            }/>
-      </div>
-      <div>
-        <button className='btn btn-success' type="submit" disabled={pristine || submitting}>Submit</button>
-        <button className='btn btn-danger' type="button" disabled={pristine || submitting} onClick={reset}>Clear Values
-        </button>
-      </div>
-    </form>
-    </div>
-  )
-}
+      <div className='row'>
+        {loginError &&
+          <div>
+            <h3 className='text-danger'>
+              Incorrect Username and/or Password
+            </h3>
+            <h5 className='text-info'>
+              Retrieve Password?
+            </h5>
+          </div>
+        }
+        <form onSubmit={handleSubmit}>
+          <div>
+            <Field
+              name="username"
+              component={username =>
+                <TextField
+                  hintText = "Username"
+                  floatingLabelText="Username"
+                  errorText = {username.touched && username.error}
+                  {...username}
+                  />
+              }/>
+            </div>
+            <div>
+              <Field
+                name="password"
+                component={password =>
+                  <TextField
+                    hintText = "Password"
+                    type="password"
+                    floatingLabelText="Password"
+                    errorText = {password.touched && password.error}
+                    {...password}
+                    />
+                }/>
+              </div>
+              <div>
+                {createAccount &&
+                  <Field
+                    name="email"
+                    component={email =>
+                      <TextField
+                        hintText="Email"
+                        floatingLabelText="Email"
+                        errorText = {email.touched && email.error}
+                        {...email}
+                        />
+                    }/>
+                  }
+                </div>
+                <div className='row'>
+                  <div className='col-xs-12'>
+                    <button
+                      className='btn btn-success'
+                      type="submit"
+                      disabled={submitting}>
+                      {createAccount ? 'Create New Account' : 'Login'}
+                    </button>
+                  </div>
+                </div>
+                <br />
+                {!createAccount &&
+                  <div className='row'>
+                    Not Registered? <button onClick={handleCreateAccountClick} className='btn btn-info' type="button" disabled={submitting}>Create Account</button>
+                </div>
+              }
+            </form>
+          </div>
+        </div>
+      )
+    }
 
 export default reduxForm({
   form: 'Login',

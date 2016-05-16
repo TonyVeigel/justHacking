@@ -8,6 +8,8 @@ class Login extends Component{
   constructor(props){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCreateAccountClick = this.handleCreateAccountClick.bind(this);
+    this.state = {createAccount:false, loginError:false};
   }
 
   handleSubmit(data){
@@ -16,15 +18,21 @@ class Login extends Component{
       .then( () =>
         this.context.router.push('/app')
       )
-      .catch( () =>
-        console.log('Login Error')
+      .catch( () => {
+          console.log('Login Error')
+          this.setState({loginError:true});
+        }
     )
+  }
+
+  handleCreateAccountClick(){
+    this.setState({createAccount:true});
   }
 
   render(){
     return(
       <div>
-        <LoginView onSubmit={this.handleSubmit} />
+        <LoginView loginError={this.state.loginError} handleCreateAccountClick={this.handleCreateAccountClick} createAccount={this.state.createAccount} onSubmit={this.handleSubmit} />
       </div>
     )
   }
