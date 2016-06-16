@@ -1,5 +1,5 @@
-
 import * as constants from '../constants/constants';
+import {addMessage} from '../actions/messageCenter';
 
 export default function clientMiddleware({dispatch, getState}) {
         return (next) => (action) => {
@@ -15,7 +15,7 @@ export default function clientMiddleware({dispatch, getState}) {
             return promise
                 .then( response => {
                   if(response.status == 401){
-                      next({type: constants.USER_AUTHORIZATION_FAILURE});
+                    next({type: constants.USER_AUTHENTICATION_FAILURE});
                     }
                     if (!response.ok) {
                       const error = new Error(response.statusText);
@@ -27,11 +27,11 @@ export default function clientMiddleware({dispatch, getState}) {
                 )
                 .then(response => response.json())
                 .then(result => {
-                  next({...rest, result, type: SUCCESS})
+                  next({...rest, result, type: SUCCESS});
                 })
                 .catch(error => {
-                    next({...rest, type: FAILURE})
-                    return Promise.reject('error');
+                    next(addMessage(Math.random(), error, 'danger'));
+                    next({...rest, type: FAILURE});
                 });
         };
 }

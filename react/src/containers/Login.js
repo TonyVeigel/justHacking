@@ -2,6 +2,7 @@ import React,{Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {loginUser} from '../actions/authentication';
 import LoginView from '../components/Login';
+import MessageCenter from '../containers/MessageCenter';
 
 class Login extends Component{
 
@@ -31,6 +32,7 @@ class Login extends Component{
   render(){
     return(
       <div>
+        <MessageCenter />
         <LoginView
           loginError={this.state.loginError}
           handleCreateAccountClick={this.handleCreateAccountClick}
