@@ -17,13 +17,9 @@ injectTapEventPlugin();
 const appStartPoint = document.getElementById('appStartPoint');
 const store = configureStore();
 
-const app = (
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
+
+ReactDOM.render(  <MuiThemeProvider muiTheme={getMuiTheme()}>
     <Provider store={store}>
       <Routes/>
     </Provider>
-  </MuiThemeProvider>
-);
-
-
-ReactDOM.render(app, appStartPoint);
+  </MuiThemeProvider>, appStartPoint);

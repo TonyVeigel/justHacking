@@ -15,14 +15,13 @@ class Login extends Component{
   handleSubmit(data){
     const {dispatch} = this.props;
     dispatch(loginUser(data))
-      .then( () =>
-        this.context.router.push('/app')
-      )
-      .catch( () => {
-          console.log('Login Error')
-          this.setState({loginError:true});
-        }
-    )
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {authentication} = nextProps;
+    if(authentication.authenticated){
+      this.context.router.push('/app')
+    }
   }
 
   handleCreateAccountClick(){
@@ -32,7 +31,11 @@ class Login extends Component{
   render(){
     return(
       <div>
-        <LoginView loginError={this.state.loginError} handleCreateAccountClick={this.handleCreateAccountClick} createAccount={this.state.createAccount} onSubmit={this.handleSubmit} />
+        <LoginView
+          loginError={this.state.loginError}
+          handleCreateAccountClick={this.handleCreateAccountClick}
+          createAccount={this.state.createAccount}
+          onSubmit={this.handleSubmit} />
       </div>
     )
   }
@@ -42,4 +45,14 @@ Login.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default connect()(Login)
+function mapStateToProps(state){
+
+  const {authentication} = state;
+
+  return {
+    authentication
+  }
+
+}
+
+export default connect(mapStateToProps)(Login)
