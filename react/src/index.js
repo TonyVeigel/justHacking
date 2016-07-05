@@ -1,4 +1,4 @@
-import 'babel-core/polyfill';
+import 'babel-polyfill';
 
 require('bootstrap/less/bootstrap.less');
 require('./index.css');

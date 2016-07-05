@@ -7,7 +7,7 @@ var mainPath = path.resolve(__dirname, 'src', 'index.js');
 module.exports = {
   devtool: 'eval',
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?reload=true',
     mainPath
   ],
   output: {
